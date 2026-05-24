@@ -1,5 +1,5 @@
 // Service Worker for TaskMaster PWA
-const CACHE_NAME = 'taskmaster-v1';
+const CACHE_NAME = 'taskmaster-v2';
 const urlsToCache = [
   '/',
   '/index.html',
