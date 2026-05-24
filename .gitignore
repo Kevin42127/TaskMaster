@@ -1,0 +1,155 @@
+# 編譯器生成的文件
+*.com
+*.class
+*.dll
+*.exe
+*.o
+*.so
+
+# 套件文件
+*.7z
+*.dmg
+*.gz
+*.iso
+*.jar
+*.rar
+*.tar
+*.zip
+
+# 日誌文件
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# 運行時數據
+pids
+*.pid
+*.seed
+*.pid.lock
+
+# 覆蓋率目錄
+lib-cov
+coverage/
+.nyc_output
+
+# Grunt 中間和輸出目錄
+.grunt
+bower_components
+
+# node-watch 配置文件
+.lock-wscript
+
+# 依賴目錄
+node_modules/
+
+# 可選的 npm 缓存目錄
+.npm
+
+# 可選的 REPL 歷史
+.node_repl_history
+
+# 輸出的 npm 包
+*.tgz
+
+# Yarn 完整性文件
+.yarn-integrity
+
+# dotenv 環境變量文件
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+# parcel-bundler 缓存
+.cache
+.parcel-cache
+
+# next.js 構建輸出
+.next
+
+# nuxt.js 構建輸出
+.nuxt
+
+# vuepress 構建輸出
+.vuepress/dist
+
+# Serverless 目錄
+.serverless
+
+# FuseBox 缓存
+.fusebox/
+
+# DynamoDB Local 文件
+.dynamodb/
+
+# TernJS port 文件
+.tern-port
+
+# Vercel
+.vercel
+
+# IDE 和編輯器
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# 操作系統生成的文件
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# 構建目錄
+build/
+dist/
+out/
+
+# 臨時文件
+tmp/
+temp/
+
+# 本地配置文件
+config.local.js
+.env.local
+
+# 測試覆蓋率
+coverage/
+
+# TypeScript
+*.tsbuildinfo
+
+# 本地開發文件
+*.local
+*.dev
+
+# 備份文件
+*.bak
+*.backup
+
+# 錯誤日誌
+error.log
+error.log.*
+
+# 調試文件
+debug.log
+debug.log.*
+
+# 部署相關
+.deploy/
+deployment/
+
+# 鎖定文件
+package-lock.json
+yarn.lock
+
+# 其他
+*.orig
+*.rej
+~$

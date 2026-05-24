@@ -1,0 +1,36 @@
+{
+  "name": "TaskMaster",
+  "short_name": "TaskMaster",
+  "description": "簡潔高效的任務管理工具",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#3525CD",
+  "theme_color": "#3525CD",
+  "orientation": "portrait-primary",
+  "scope": "/",
+  "lang": "zh-TW",
+  "icons": [
+    {
+      "src": "icons/icon-512x512.svg",
+      "sizes": "512x512",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ],
+  "categories": ["productivity", "business"],
+  "shortcuts": [
+    {
+      "name": "新增任務",
+      "short_description": "快速新增任務",
+      "description": "打開新增任務模態框",
+      "url": "/",
+      "icons": [
+        {
+          "src": "icons/icon-512x512.svg",
+          "sizes": "512x512",
+          "type": "image/svg+xml"
+        }
+      ]
+    }
+  ]
+}

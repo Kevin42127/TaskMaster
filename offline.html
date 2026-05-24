@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TaskMaster - 離線模式</title>
+    <meta name="description" content="TaskMaster 離線模式頁面">
+    <meta name="theme-color" content="#3525CD">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet">
+    <link rel="manifest" href="/manifest.json">
+    <link rel="apple-touch-icon" href="/icons/icon-512x512.svg">
+    <link rel="icon" type="image/svg+xml" href="/icons/icon-512x512.svg">
+    <style>
+        * {
+            font-family: 'Inter', sans-serif;
+        }
+        
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+            vertical-align: middle;
+        }
+        
+        .card-shadow {
+            box-shadow: 0 4px 10px rgba(53, 37, 205, 0.04);
+        }
+        
+        .card-shadow-hover:hover {
+            box-shadow: 0 8px 20px rgba(53, 37, 205, 0.08);
+        }
+        
+        .fade-in {
+            animation: fadeIn 0.5s ease-in;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .pulse-animation {
+            animation: pulse 2s infinite;
+        }
+        
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); opacity: 1; }
+            50% { transform: scale(1.05); opacity: 0.8; }
+        }
+    </style>
+</head>
+<body class="bg-gray-50 min-h-screen flex items-center justify-center">
+    <div class="max-w-md w-full mx-4 fade-in">
+        <div class="bg-white rounded-xl p-8 card-shadow card-shadow-hover">
+            <!-- 圖標區域 -->
+            <div class="flex justify-center mb-6">
+                <div class="w-20 h-20 bg-indigo-100 rounded-2xl flex items-center justify-center pulse-animation">
+                    <span class="material-symbols-outlined text-indigo-600 text-4xl">wifi_off</span>
+                </div>
+            </div>
+            
+            <!-- 標題區域 -->
+            <div class="text-center mb-6">
+                <h1 class="text-2xl font-bold text-gray-900 mb-2">TaskMaster</h1>
+                <p class="text-lg font-semibold text-indigo-600 mb-2">離線模式</p>
+                <p class="text-gray-600">您目前處於離線模式</p>
+            </div>
+            
+            <!-- 說明文字 -->
+            <div class="bg-gray-50 rounded-lg p-4 mb-6">
+                <div class="flex items-start gap-3">
+                    <span class="material-symbols-outlined text-indigo-600 text-xl mt-0.5">info</span>
+                    <div class="flex-1">
+                        <p class="text-sm text-gray-700 leading-relaxed">
+                            請檢查您的網路連接並重新整理頁面。TaskMaster 會自動恢復連線並同步您的任務數據。
+                        </p>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- 操作按鈕 -->
+            <div class="space-y-3">
+                <button onclick="window.location.reload()" 
+                        class="w-full bg-indigo-600 text-white py-3 px-4 rounded-xl font-semibold shadow-md hover:bg-indigo-700 transition-all duration-200 flex items-center justify-center gap-2">
+                    <span class="material-symbols-outlined">refresh</span>
+                    重新整理頁面
+                </button>
+                
+                <button onclick="window.history.back()" 
+                        class="w-full bg-gray-100 text-gray-700 py-3 px-4 rounded-xl font-semibold hover:bg-gray-200 transition-all duration-200 flex items-center justify-center gap-2">
+                    <span class="material-symbols-outlined">arrow_back</span>
+                    返回上一頁
+                </button>
+            </div>
+            
+            <!-- 提示資訊 -->
+            <div class="mt-6 pt-6 border-t border-gray-200">
+                <div class="flex items-center justify-center gap-2 text-sm text-gray-500">
+                    <span class="material-symbols-outlined text-[16px]">schedule</span>
+                    <span>最後更新: <span id="lastUpdate">剛剛</span></span>
+                </div>
+            </div>
+        </div>
+        
+        <!-- 底部資訊 -->
+        <div class="text-center mt-6">
+            <p class="text-xs text-gray-500">
+                TaskMaster v1.0.0 • 離線模式
+            </p>
+        </div>
+    </div>
+    
+    <script>
+        // 更新時間顯示
+        function updateTime() {
+            const now = new Date();
+            const timeString = now.toLocaleTimeString('zh-TW', { 
+                hour: '2-digit', 
+                minute: '2-digit' 
+            });
+            document.getElementById('lastUpdate').textContent = timeString;
+        }
+        
+        // 初始化
+        updateTime();
+        setInterval(updateTime, 60000); // 每分鐘更新一次
+        
+        // 檢查網路狀態
+        function checkNetworkStatus() {
+            if (navigator.onLine) {
+                // 網路已恢復，顯示恢復提示並導向首頁
+                showNetworkRecovery();
+                setTimeout(() => {
+                    window.location.href = '/';
+                }, 1500);
+            }
+        }
+        
+        // 顯示網路恢復提示
+        function showNetworkRecovery() {
+            const container = document.querySelector('.bg-white');
+            const recoveryDiv = document.createElement('div');
+            recoveryDiv.className = 'fixed inset-0 bg-green-50 flex items-center justify-center z-50 fade-in';
+            recoveryDiv.innerHTML = `
+                <div class="text-center">
+                    <div class="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                        <span class="material-symbols-outlined text-green-600 text-3xl">wifi</span>
+                    </div>
+                    <h2 class="text-xl font-bold text-green-800 mb-2">網路已恢復</h2>
+                    <p class="text-green-600 mb-4">正在返回首頁...</p>
+                    <div class="w-8 h-8 border-2 border-green-600 border-t-transparent rounded-full animate-spin mx-auto"></div>
+                </div>
+            `;
+            document.body.appendChild(recoveryDiv);
+        }
+        
+        // 監聽網路狀態變化
+        window.addEventListener('online', checkNetworkStatus);
+        
+        // 定期檢查網路狀態
+        setInterval(checkNetworkStatus, 5000);
+    </script>
+</body>
+</html>
