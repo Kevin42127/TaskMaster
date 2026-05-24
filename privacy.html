@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TaskMaster - 隱私政策</title>
+    <meta name="description" content="TaskMaster 隱私政策">
+    <meta name="theme-color" content="#3525CD">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet">
+    <link rel="manifest" href="/manifest.json">
+    <link rel="apple-touch-icon" href="/icons/512.png">
+    <link rel="icon" type="image/png" href="/icons/512.png">
+    <style>
+        * {
+            font-family: 'Inter', sans-serif;
+        }
+        
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+            vertical-align: middle;
+        }
+        
+        .card-shadow {
+            box-shadow: 0 4px 10px rgba(53, 37, 205, 0.04);
+        }
+        
+        .card-shadow-hover:hover {
+            box-shadow: 0 8px 20px rgba(53, 37, 205, 0.08);
+        }
+        
+        .fade-in {
+            animation: fadeIn 0.5s ease-in;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+    </style>
+</head>
+<body class="bg-gray-50 min-h-screen">
+    <div class="max-w-4xl mx-auto p-6 fade-in">
+        <!-- 頁首 -->
+        <header class="mb-8">
+            <div class="flex items-center justify-between mb-6">
+                <div class="flex items-center space-x-3">
+                    <button onclick="window.location.href='settings.html'" class="p-2 hover:bg-gray-100 rounded-lg transition-colors">
+                        <span class="material-symbols-outlined">arrow_back</span>
+                    </button>
+                    <h1 class="text-2xl font-bold text-gray-900">隱私政策</h1>
+                </div>
+                <div class="text-sm text-gray-500">
+                    最後更新：2026年5月24日
+                </div>
+            </div>
+        </header>
+
+        <!-- 主要內容 -->
+        <main class="space-y-6">
+            <!-- 簡介 -->
+            <div class="bg-white rounded-xl p-6 card-shadow">
+                <h2 class="text-xl font-semibold text-gray-900 mb-4 flex items-center">
+                    <span class="material-symbols-outlined mr-2 text-indigo-600">privacy_tip</span>
+                    隱私政策概述
+                </h2>
+                <p class="text-gray-700 leading-relaxed">
+                    TaskMaster 是一個完全本地的任務管理工具，我們非常重視您的隱私。本隱私政策說明了我們如何處理您的資訊。
+                </p>
+            </div>
+
+            <!-- 資訊收集 -->
+            <div class="bg-white rounded-xl p-6 card-shadow">
+                <h2 class="text-xl font-semibold text-gray-900 mb-4 flex items-center">
+                    <span class="material-symbols-outlined mr-2 text-indigo-600">data_usage</span>
+                    資訊收集
+                </h2>
+                <div class="space-y-3">
+                    <div class="flex items-start">
+                        <span class="material-symbols-outlined text-green-600 mr-3 mt-1">check_circle</span>
+                        <div>
+                            <h3 class="font-medium text-gray-900">我們不收集任何個人資訊</h3>
+                            <p class="text-gray-600 text-sm mt-1">TaskMaster 不收集、儲存或傳輸任何可以識別您個人身份的資訊。</p>
+                        </div>
+                    </div>
+                    <div class="flex items-start">
+                        <span class="material-symbols-outlined text-green-600 mr-3 mt-1">check_circle</span>
+                        <div>
+                            <h3 class="font-medium text-gray-900">本地儲存</h3>
+                            <p class="text-gray-600 text-sm mt-1">您的所有任務資料都僅儲存在您設備的瀏覽器本地儲存中。</p>
+                        </div>
+                    </div>
+                    <div class="flex items-start">
+                        <span class="material-symbols-outlined text-green-600 mr-3 mt-1">check_circle</span>
+                        <div>
+                            <h3 class="font-medium text-gray-900">無第三方服務</h3>
+                            <p class="text-gray-600 text-sm mt-1">我們不使用任何第三方分析服務、廣告服務或追蹤服務。</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 資訊使用 -->
+            <div class="bg-white rounded-xl p-6 card-shadow">
+                <h2 class="text-xl font-semibold text-gray-900 mb-4 flex items-center">
+                    <span class="material-symbols-outlined mr-2 text-indigo-600">settings_applications</span>
+                    資訊使用
+                </h2>
+                <div class="space-y-3">
+                    <div class="flex items-start">
+                        <span class="material-symbols-outlined text-blue-600 mr-3 mt-1">task_alt</span>
+                        <div>
+                            <h3 class="font-medium text-gray-900">任務管理</h3>
+                            <p class="text-gray-600 text-sm mt-1">儲存的資料僅用於任務管理功能，包括創建、編輯、刪除和組織任務。</p>
+                        </div>
+                    </div>
+                    <div class="flex items-start">
+                        <span class="material-symbols-outlined text-blue-600 mr-3 mt-1">task_alt</span>
+                        <div>
+                            <h3 class="font-medium text-gray-900">本地功能</h3>
+                            <p class="text-gray-600 text-sm mt-1">支援離線使用、通知提醒和本地備份功能。</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 資訊分享 -->
+            <div class="bg-white rounded-xl p-6 card-shadow">
+                <h2 class="text-xl font-semibold text-gray-900 mb-4 flex items-center">
+                    <span class="material-symbols-outlined mr-2 text-indigo-600">share</span>
+                    資訊分享
+                </h2>
+                <div class="space-y-3">
+                    <div class="flex items-start">
+                        <span class="material-symbols-outlined text-red-600 mr-3 mt-1">block</span>
+                        <div>
+                            <h3 class="font-medium text-gray-900">不與第三方分享</h3>
+                            <p class="text-gray-600 text-sm mt-1">我們不會將您的任何資訊分享給第三方。</p>
+                        </div>
+                    </div>
+                    <div class="flex items-start">
+                        <span class="material-symbols-outlined text-red-600 mr-3 mt-1">block</span>
+                        <div>
+                            <h3 class="font-medium text-gray-900">不出售資訊</h3>
+                            <p class="text-gray-600 text-sm mt-1">我們不會出售、租借或以其他方式將您的資訊提供給他人。</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 資訊安全 -->
+            <div class="bg-white rounded-xl p-6 card-shadow">
+                <h2 class="text-xl font-semibold text-gray-900 mb-4 flex items-center">
+                    <span class="material-symbols-outlined mr-2 text-indigo-600">security</span>
+                    資訊安全
+                </h2>
+                <div class="space-y-3">
+                    <div class="flex items-start">
+                        <span class="material-symbols-outlined text-purple-600 mr-3 mt-1">shield</span>
+                        <div>
+                            <h3 class="font-medium text-gray-900">本地儲存安全</h3>
+                            <p class="text-gray-600 text-sm mt-1">您的資料僅儲存在本地，無法通過網路訪問。</p>
+                        </div>
+                    </div>
+                    <div class="flex items-start">
+                        <span class="material-symbols-outlined text-purple-600 mr-3 mt-1">shield</span>
+                        <div>
+                            <h3 class="font-medium text-gray-900">HTTPS 連接</h3>
+                            <p class="text-gray-600 text-sm mt-1">應用程式通過 HTTPS 連接，確保傳輸安全。</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 用戶權利 -->
+            <div class="bg-white rounded-xl p-6 card-shadow">
+                <h2 class="text-xl font-semibold text-gray-900 mb-4 flex items-center">
+                    <span class="material-symbols-outlined mr-2 text-indigo-600">account_balance</span>
+                    用戶權利
+                </h2>
+                <div class="space-y-3">
+                    <div class="flex items-start">
+                        <span class="material-symbols-outlined text-orange-600 mr-3 mt-1">edit</span>
+                        <div>
+                            <h3 class="font-medium text-gray-900">編輯權利</h3>
+                            <p class="text-gray-600 text-sm mt-1">您可以隨時編輯或刪除您的任務資料。</p>
+                        </div>
+                    </div>
+                    <div class="flex items-start">
+                        <span class="material-symbols-outlined text-orange-600 mr-3 mt-1">delete</span>
+                        <div>
+                            <h3 class="font-medium text-gray-900">刪除權利</h3>
+                            <p class="text-gray-600 text-sm mt-1">您可以清除瀏覽器本地儲存來刪除所有資料。</p>
+                        </div>
+                    </div>
+                    <div class="flex items-start">
+                        <span class="material-symbols-outlined text-orange-600 mr-3 mt-1">backup</span>
+                        <div>
+                            <h3 class="font-medium text-gray-900">備份權利</h3>
+                            <p class="text-gray-600 text-sm mt-1">您可以通過瀏覽器開發者工具手動備份您的任務資料。</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 聯絡資訊 -->
+            <div class="bg-white rounded-xl p-6 card-shadow">
+                <h2 class="text-xl font-semibold text-gray-900 mb-4 flex items-center">
+                    <span class="material-symbols-outlined mr-2 text-indigo-600">contact_mail</span>
+                    聯絡資訊
+                </h2>
+                <div class="bg-gray-50 rounded-lg p-4">
+                    <p class="text-gray-700 mb-2">如果您對本隱私政策有任何疑問，請聯絡我們：</p>
+                    <div class="space-y-2">
+                        <p class="text-gray-600"><span class="font-medium">發行者：</span> Kevin</p>
+                        <p class="text-gray-600"><span class="font-medium">應用程式：</span> TaskMaster</p>
+                        <p class="text-gray-600"><span class="font-medium">聯絡方式：</span> tyouxipindao@gmail.com</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 政策更新 -->
+            <div class="bg-white rounded-xl p-6 card-shadow">
+                <h2 class="text-xl font-semibold text-gray-900 mb-4 flex items-center">
+                    <span class="material-symbols-outlined mr-2 text-indigo-600">update</span>
+                    政策更新
+                </h2>
+                <p class="text-gray-700">
+                    我們可能會更新本隱私政策。任何重大變更都會在應用程式中通知用戶。
+                </p>
+            </div>
+        </main>
+
+        <!-- 頁尾 -->
+        <footer class="mt-8 pt-6 border-t border-gray-200">
+            <div class="flex flex-col sm:flex-row justify-between items-center space-y-4 sm:space-y-0">
+                <div class="text-sm text-gray-500">
+                    © 2026 TaskMaster. 版權所有。
+                </div>
+                <div class="flex space-x-4">
+                    <a href="terms.html" class="text-sm text-indigo-600 hover:text-indigo-700 transition-colors">
+                        服務條款
+                    </a>
+                    <a href="settings.html" class="text-sm text-indigo-600 hover:text-indigo-700 transition-colors">
+                        返回設定
+                    </a>
+                </div>
+            </div>
+        </footer>
+    </div>
+</body>
+</html>

@@ -41,6 +41,14 @@
       "dest": "/settings.html"
     },
     {
+      "src": "/privacy",
+      "dest": "/privacy.html"
+    },
+    {
+      "src": "/terms",
+      "dest": "/terms.html"
+    },
+    {
       "src": "/offline",
       "dest": "/offline.html"
     },
