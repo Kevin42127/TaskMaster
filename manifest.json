@@ -11,9 +11,15 @@
   "lang": "zh-TW",
   "icons": [
     {
-      "src": "icons/icon-512x512.svg",
+      "src": "icons/192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "icons/512.png",
       "sizes": "512x512",
-      "type": "image/svg+xml",
+      "type": "image/png",
       "purpose": "any maskable"
     }
   ],
@@ -26,9 +32,10 @@
       "url": "/",
       "icons": [
         {
-          "src": "icons/icon-512x512.svg",
+          "src": "icons/512.png",
           "sizes": "512x512",
-          "type": "image/svg+xml"
+          "type": "image/png",
+          "purpose": "any maskable"
         }
       ]
     }

@@ -4,7 +4,12 @@ const urlsToCache = [
   '/',
   '/index.html',
   '/settings.html',
-  '/manifest.json'
+  '/manifest.json',
+  '/offline.html',
+  '/sw.js',
+  '/browserconfig.xml',
+  '/icons/192.png',
+  '/icons/512.png'
 ];
 
 // 安裝 Service Worker
