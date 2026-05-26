@@ -1126,6 +1126,11 @@
                 renderTaskList();
                 storageManager.saveTasks();
                 showNotification(`已清空 ${taskCount} 個任務`, 'success');
+                
+                // 3秒後提示用戶點擊左側新增任務按鈕
+                setTimeout(() => {
+                    showNotification('點擊左側「新增任務」按鈕開始創建新任務', 'info');
+                }, 3000);
             }, taskCards.length * 50 + 300);
         }
 
