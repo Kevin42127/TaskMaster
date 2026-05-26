@@ -1,0 +1,775 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TaskMaster</title>
+    <meta name="description" content="記錄您的每日心情和感受">
+    <meta name="theme-color" content="#3525CD">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="default">
+    <meta name="apple-mobile-web-app-title" content="TaskMaster">
+    <meta name="application-name" content="TaskMaster">
+    <meta name="msapplication-TileColor" content="#3525CD">
+    <meta name="msapplication-config" content="/browserconfig.xml">
+    <link rel="manifest" href="/manifest.json">
+    <link rel="apple-touch-icon" href="/icons/512.png">
+    <link rel="icon" type="image/png" href="/icons/512.png">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet">
+    <style>
+        * {
+            font-family: 'Inter', sans-serif;
+        }
+        
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+            vertical-align: middle;
+        }
+        
+        .mood-card {
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+        
+        .mood-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 12px 24px rgba(0, 0, 0, 0.15);
+        }
+        
+        .mood-card.selected {
+            border-color: #3525CD;
+            background-color: #3525CD;
+            color: white;
+        }
+        
+        .mood-emoji {
+            font-size: 3rem;
+            transition: transform 0.2s ease;
+        }
+        
+        .mood-card:hover .mood-emoji {
+            transform: scale(1.2);
+        }
+        
+        .mood-card.selected .mood-emoji {
+            transform: scale(1.3);
+        }
+        
+        .fade-in {
+            animation: fadeIn 0.25s ease-in;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        
+        .slide-in {
+            animation: slideIn 0.3s ease-out;
+        }
+        
+        @keyframes slideIn {
+            from { transform: translateX(100%); }
+            to { transform: translateX(0); }
+        }
+        
+        .custom-scrollbar::-webkit-scrollbar {
+            width: 6px;
+        }
+        
+        .custom-scrollbar::-webkit-scrollbar-track {
+            background: #f1f5f9;
+            border-radius: 3px;
+        }
+        
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+            background: #cbd5e1;
+            border-radius: 3px;
+        }
+        
+        .custom-scrollbar::-webkit-scrollbar-thumb:hover {
+            background: #94a3b8;
+        }
+        
+        .mood-history-item {
+            transition: all 0.2s ease;
+        }
+        
+        .mood-history-item:hover {
+            background-color: #f8fafc;
+        }
+        
+        .mood-stat-card {
+            background-color: #3525CD;
+            transition: transform 0.2s ease;
+        }
+        
+        .mood-stat-card:hover {
+            transform: translateY(-2px);
+        }
+        
+        /* 自訂義文字選取樣式 */
+        ::selection {
+            background-color: #6366f1;
+            color: white;
+        }
+        
+        ::-moz-selection {
+            background-color: #6366f1;
+            color: white;
+        }
+        
+        /* 針對不同元素的自訂選取 */
+        .mood-card ::selection {
+            background-color: #6366f1;
+            color: white;
+        }
+        
+        .mood-card ::-moz-selection {
+            background-color: #6366f1;
+            color: white;
+        }
+        
+        /* 按鈕文字選取 */
+        .btn ::selection {
+            background-color: #6366f1;
+            color: white;
+        }
+        
+        .btn ::-moz-selection {
+            background-color: #6366f1;
+            color: white;
+        }
+        
+        /* 標題選取 */
+        h1, h2, h3, h4, h5, h6 {
+            ::selection {
+                background-color: #6366f1;
+                color: white;
+            }
+            
+            ::-moz-selection {
+                background-color: #6366f1;
+                color: white;
+            }
+        }
+        
+        /* 連結選取 */
+        a ::selection {
+            background-color: #6366f1;
+            color: white;
+        }
+        
+        a ::-moz-selection {
+            background-color: #6366f1;
+            color: white;
+        }
+        
+        /* 輸入框選取 */
+        input ::selection,
+        textarea ::selection {
+            background-color: #6366f1;
+            color: white;
+        }
+        
+        input ::-moz-selection,
+        textarea ::-moz-selection {
+            background-color: #6366f1;
+            color: white;
+        }
+        
+        /* 響應式設計 */
+        @media (max-width: 768px) {
+            .main-container {
+                flex-direction: column;
+            }
+            
+            .sidebar {
+                width: 100%;
+                height: auto;
+                position: relative;
+                border-right: none;
+                border-bottom: 1px solid #e5e7eb;
+            }
+            
+            .mood-content {
+                width: 100%;
+                min-width: unset;
+            }
+            
+            .mobile-menu-btn {
+                display: block;
+            }
+            
+            .sidebar.hidden {
+                display: none;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .container {
+                padding: 1rem;
+            }
+            
+            .mood-card {
+                padding: 1rem;
+            }
+            
+            .btn {
+                padding: 0.5rem 1rem;
+                font-size: 0.875rem;
+            }
+        }
+    </style>
+</head>
+<body class="bg-gray-50 text-gray-900 overflow-hidden">
+    <!-- 側邊導航欄 -->
+    <aside id="sidebar" class="h-screen w-64 fixed left-0 top-0 bg-white shadow-lg flex flex-col p-4 border-r border-gray-200 z-50">
+        <div class="mb-8 px-2">
+            <h1 class="text-2xl font-bold text-indigo-600">TaskMaster</h1>
+            <p class="text-sm text-gray-500">生產力工作空間</p>
+        </div>
+        
+        <nav class="flex-1 space-y-1">
+            <a href="index.html" class="nav-item flex items-center gap-3 px-4 py-3 text-gray-600 hover:bg-gray-100 transition-colors rounded-xl">
+                <span class="material-symbols-outlined">list_alt</span>
+                任務列表
+            </a>
+            <a href="#" class="nav-item flex items-center gap-3 px-4 py-3 bg-indigo-100 text-indigo-700 rounded-xl font-semibold" data-view="mood">
+                <span class="material-symbols-outlined">mood</span>
+                心情記錄
+            </a>
+            <a href="settings.html" class="nav-item flex items-center gap-3 px-4 py-3 text-gray-600 hover:bg-gray-100 transition-colors rounded-xl">
+                <span class="material-symbols-outlined">settings</span>
+                設定
+            </a>
+        </nav>
+        
+            </aside>
+
+    <!-- 主內容區域 -->
+    <main class="ml-64 h-screen flex">
+        <!-- 心情記錄內容區 -->
+        <section id="moodContent" class="flex-1 h-full bg-white overflow-y-auto custom-scrollbar p-8">
+            <div class="max-w-4xl mx-auto">
+                <!-- 標題區域 -->
+                <div class="mb-8">
+                    <h1 class="text-3xl font-bold text-gray-900 mb-2">心情記錄</h1>
+                    <p class="text-gray-600">記錄您的每日感受，追蹤情緒變化</p>
+                </div>
+
+                <!-- 統計卡片 -->
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
+                    <div class="mood-stat-card text-white p-6 rounded-xl">
+                        <div class="flex items-center justify-between">
+                            <div>
+                                <p class="text-white/80 text-sm mb-1">今日心情</p>
+                                <p class="text-2xl font-bold" id="todayMood">尚未記錄</p>
+                            </div>
+                            <span class="material-symbols-outlined text-3xl text-white/60">today</span>
+                        </div>
+                    </div>
+                    <div class="bg-blue-500 text-white p-6 rounded-xl mood-stat-card">
+                        <div class="flex items-center justify-between">
+                            <div>
+                                <p class="text-white/80 text-sm mb-1">總記錄數</p>
+                                <p class="text-2xl font-bold" id="totalRecords">0</p>
+                            </div>
+                            <span class="material-symbols-outlined text-3xl text-white/60">bar_chart</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 心情選擇區 -->
+                <div class="bg-gray-50 rounded-xl p-6 mb-8">
+                    <h2 class="text-xl font-semibold mb-4">今天的心情如何？</h2>
+                    <div class="grid grid-cols-2 md:grid-cols-5 gap-4 mb-6">
+                        <div class="mood-card bg-white border-2 border-gray-200 rounded-xl p-4 text-center" data-mood="very-happy">
+                            <div class="mood-emoji mb-2">😄</div>
+                            <p class="font-medium">非常開心</p>
+                        </div>
+                        <div class="mood-card bg-white border-2 border-gray-200 rounded-xl p-4 text-center" data-mood="happy">
+                            <div class="mood-emoji mb-2">😊</div>
+                            <p class="font-medium">開心</p>
+                        </div>
+                        <div class="mood-card bg-white border-2 border-gray-200 rounded-xl p-4 text-center" data-mood="neutral">
+                            <div class="mood-emoji mb-2">😐</div>
+                            <p class="font-medium">一般</p>
+                        </div>
+                        <div class="mood-card bg-white border-2 border-gray-200 rounded-xl p-4 text-center" data-mood="sad">
+                            <div class="mood-emoji mb-2">😢</div>
+                            <p class="font-medium">難過</p>
+                        </div>
+                        <div class="mood-card bg-white border-2 border-gray-200 rounded-xl p-4 text-center" data-mood="angry">
+                            <div class="mood-emoji mb-2">😠</div>
+                            <p class="font-medium">生氣</p>
+                        </div>
+                    </div>
+                    
+                    <!-- 詳細描述 -->
+                    <div class="mb-4">
+                        <label class="block text-sm font-medium mb-2">詳細描述（選填）</label>
+                        <textarea id="moodNote" rows="3" 
+                                  class="w-full px-4 py-3 text-base border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500 resize-none"
+                                  placeholder="描述一下今天的感受..."></textarea>
+                    </div>
+                    
+                        
+                    <button id="saveMoodBtn" class="px-8 bg-indigo-600 text-white py-3 rounded-xl font-semibold hover:bg-indigo-700 transition-colors">
+                        儲存心情記錄
+                    </button>
+                </div>
+
+                <!-- 歷史記錄 -->
+                <div class="bg-white rounded-xl border border-gray-200 p-6">
+                    <div class="flex items-center justify-between mb-4">
+                        <h2 class="text-xl font-semibold">心情歷史</h2>
+                        <div class="flex items-center gap-3">
+                            <button id="clearAllMoodsBtn" class="px-3 py-1.5 bg-red-100 text-red-700 text-sm font-semibold rounded-lg hover:bg-red-200 transition-colors">
+                                <span class="material-symbols-outlined text-[16px]">delete_sweep</span>
+                                清空所有
+                            </button>
+                            <span class="bg-indigo-100 text-indigo-700 text-sm font-semibold px-2 py-1 rounded-lg">
+                                <span id="moodCount">0</span> 項記錄
+                            </span>
+                        </div>
+                    </div>
+                    <div id="moodHistory" class="space-y-3">
+                        <!-- 歷史記錄將由 JavaScript 動態生成 -->
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- 通知系統 -->
+    <div id="notificationContainer" class="fixed top-4 right-4 z-50 space-y-2"></div>
+
+    <script>
+        // 心情數據管理
+        class MoodManager {
+            constructor() {
+                this.storageKey = 'taskmaster_moods';
+                this.moods = this.loadMoods();
+                this.selectedMood = null;
+            }
+            
+            loadMoods() {
+                try {
+                    const data = localStorage.getItem(this.storageKey);
+                    return data ? JSON.parse(data) : [];
+                } catch (error) {
+                    console.error('載入心情記錄失敗:', error);
+                    return [];
+                }
+            }
+            
+            saveMoods() {
+                try {
+                    localStorage.setItem(this.storageKey, JSON.stringify(this.moods));
+                    return true;
+                } catch (error) {
+                    console.error('儲存心情記錄失敗:', error);
+                    return false;
+                }
+            }
+            
+            addMood(mood, note) {
+                const moodRecord = {
+                    id: Date.now(),
+                    mood: mood,
+                    note: note,
+                    date: new Date().toISOString(),
+                    createdAt: new Date().toISOString()
+                };
+                
+                this.moods.unshift(moodRecord);
+                return this.saveMoods();
+            }
+            
+            getTodayMood() {
+                const today = new Date().toDateString();
+                return this.moods.find(mood => new Date(mood.date).toDateString() === today);
+            }
+            
+            getMoodStats() {
+                return {
+                    total: this.moods.length,
+                    today: this.getTodayMood()
+                };
+            }
+        }
+
+        // 初始化心情管理器
+        const moodManager = new MoodManager();
+
+        // 心情對應
+        const moodEmojis = {
+            'very-happy': '😄',
+            'happy': '😊',
+            'neutral': '😐',
+            'sad': '😢',
+            'angry': '😠'
+        };
+
+        const moodLabels = {
+            'very-happy': '非常開心',
+            'happy': '開心',
+            'neutral': '一般',
+            'sad': '難過',
+            'angry': '生氣'
+        };
+
+        // 初始化
+        document.addEventListener('DOMContentLoaded', function() {
+            setupEventListeners();
+            updateStats();
+            renderMoodHistory();
+            updateMoodCount();
+        });
+
+        // 設置事件監聽器
+        function setupEventListeners() {
+            // 心情卡片選擇
+            document.querySelectorAll('.mood-card').forEach(card => {
+                card.addEventListener('click', function() {
+                    document.querySelectorAll('.mood-card').forEach(c => c.classList.remove('selected'));
+                    this.classList.add('selected');
+                    moodManager.selectedMood = this.dataset.mood;
+                });
+            });
+
+            // 清空所有心情記錄按鈕
+            document.getElementById('clearAllMoodsBtn').addEventListener('click', clearAllMoods);
+
+            // 儲存按鈕
+            document.getElementById('saveMoodBtn').addEventListener('click', saveMood);
+        }
+
+        // 儲存心情記錄
+        function saveMood() {
+            if (!moodManager.selectedMood) {
+                showNotification('請選擇今天的心情', 'error');
+                return;
+            }
+
+            const note = document.getElementById('moodNote').value.trim();
+            
+            if (moodManager.addMood(moodManager.selectedMood, note)) {
+                showNotification('心情記錄已儲存', 'success');
+                
+                // 重置表單
+                document.querySelectorAll('.mood-card').forEach(c => c.classList.remove('selected'));
+                document.getElementById('moodNote').value = '';
+                
+                moodManager.selectedMood = null;
+                
+                // 更新統計和歷史
+                updateStats();
+                renderMoodHistory();
+            } else {
+                showNotification('儲存失敗，請重試', 'error');
+            }
+        }
+
+        // 更新統計數據
+        function updateStats() {
+            const stats = moodManager.getMoodStats();
+            
+            // 今日心情
+            const todayMoodElement = document.getElementById('todayMood');
+            if (stats.today) {
+                todayMoodElement.textContent = moodEmojis[stats.today.mood] + ' ' + moodLabels[stats.today.mood];
+            } else {
+                todayMoodElement.textContent = '尚未記錄';
+            }
+            
+            // 總記錄數
+            document.getElementById('totalRecords').textContent = stats.total;
+            
+            // 更新心情計數
+            updateMoodCount();
+        }
+
+        // 更新心情計數
+        function updateMoodCount() {
+            const moodCount = moodManager.moods.length;
+            document.getElementById('moodCount').textContent = moodCount;
+        }
+
+        // 清空所有心情記錄
+        function clearAllMoods() {
+            if (moodManager.moods.length === 0) {
+                showNotification('沒有心情記錄可以清空', 'info');
+                return;
+            }
+            
+            const moodCount = moodManager.moods.length;
+            const confirmDialog = document.createElement('div');
+            confirmDialog.className = 'fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 fade-in';
+            confirmDialog.innerHTML = `
+                <div class="bg-white rounded-xl p-6 w-full max-w-md transform transition-opacity duration-200 opacity-0">
+                    <div class="flex items-center gap-3 mb-4">
+                        <div class="w-12 h-12 bg-red-100 rounded-full flex items-center justify-center">
+                            <span class="material-symbols-outlined text-red-600 text-2xl">warning</span>
+                        </div>
+                        <div>
+                            <h3 class="text-lg font-bold text-gray-900">清空所有心情記錄</h3>
+                            <p class="text-sm text-gray-500">此操作將永久刪除所有 ${moodCount} 個心情記錄</p>
+                        </div>
+                    </div>
+                    <div class="mb-6">
+                        <p class="text-gray-700">確定要清空所有心情記錄嗎？此操作無法復原。</p>
+                    </div>
+                    <div class="flex gap-3 justify-end">
+                        <button onclick="closeClearMoodsConfirm(this)" 
+                                class="px-4 py-2 text-gray-600 hover:bg-gray-100 rounded-lg transition-all duration-150">
+                            取消
+                        </button>
+                        <button onclick="confirmClearAllMoods(this)" 
+                                class="px-4 py-2 bg-red-600 text-white rounded-lg transition-all duration-150 hover:bg-red-700">
+                            確定清空
+                        </button>
+                    </div>
+                </div>
+            `;
+            
+            document.body.appendChild(confirmDialog);
+            
+            // 動畫進入
+            setTimeout(() => {
+                confirmDialog.querySelector('.bg-white').classList.remove('opacity-0');
+                confirmDialog.querySelector('.bg-white').classList.add('opacity-100');
+            }, 10);
+        }
+
+        // 關閉清空心情記錄確認對話框
+        function closeClearMoodsConfirm(button) {
+            const dialog = button.closest('.fixed');
+            dialog.querySelector('.bg-white').classList.add('opacity-0');
+            dialog.querySelector('.bg-white').classList.remove('opacity-100');
+            setTimeout(() => {
+                document.body.removeChild(dialog);
+            }, 150);
+        }
+
+        // 確認清空所有心情記錄
+        function confirmClearAllMoods(button) {
+            // 批量刪除動畫
+            const moodItems = document.querySelectorAll('.mood-history-item');
+            moodItems.forEach((item, index) => {
+                setTimeout(() => {
+                    item.style.transition = 'opacity 0.3s ease-out';
+                    item.style.opacity = '0';
+                }, index * 50);
+            });
+            
+            // 關閉對話框
+            closeClearMoodsConfirm(button);
+            
+            // 延遲刪除以顯示動畫
+            setTimeout(() => {
+                moodManager.moods = [];
+                moodManager.saveMoods();
+                updateStats();
+                renderMoodHistory();
+                showNotification(`已清空 ${moodCount} 個心情記錄`, 'success');
+                
+                // 3秒後提示用戶點擊上方新增心情記錄
+                setTimeout(() => {
+                    showNotification('點擊上方「儲存心情記錄」按鈕開始記錄新心情', 'info');
+                }, 3000);
+            }, moodItems.length * 50 + 300);
+        }
+
+        // 渲染心情歷史
+        function renderMoodHistory() {
+            const historyContainer = document.getElementById('moodHistory');
+            historyContainer.innerHTML = '';
+            
+            if (moodManager.moods.length === 0) {
+                historyContainer.innerHTML = `
+                    <div class="text-center py-8 border-2 border-dashed border-gray-300 rounded-xl">
+                        <span class="material-symbols-outlined text-4xl text-gray-300 mb-4">mood</span>
+                        <p class="text-gray-500 font-medium">還沒有心情記錄</p>
+                        <p class="text-sm text-gray-400 mt-2">開始記錄您的第一個心情吧</p>
+                    </div>
+                `;
+                return;
+            }
+
+            // 按日期分組
+            const groupedMoods = {};
+            moodManager.moods.forEach(mood => {
+                const date = new Date(mood.date).toDateString();
+                if (!groupedMoods[date]) {
+                    groupedMoods[date] = [];
+                }
+                groupedMoods[date].push(mood);
+            });
+
+            // 渲染每個日期的記錄
+            Object.keys(groupedMoods).forEach(date => {
+                const dateMoods = groupedMoods[date];
+                const dateObj = new Date(date);
+                const isToday = dateObj.toDateString() === new Date().toDateString();
+                const isYesterday = dateObj.toDateString() === new Date(Date.now() - 86400000).toDateString();
+                
+                let dateLabel = '';
+                if (isToday) {
+                    dateLabel = '今天';
+                } else if (isYesterday) {
+                    dateLabel = '昨天';
+                } else {
+                    dateLabel = dateObj.toLocaleDateString('zh-TW', { month: 'long', day: 'numeric' });
+                }
+
+                const dateSection = document.createElement('div');
+                dateSection.className = 'mb-6';
+                dateSection.innerHTML = `
+                    <h3 class="font-semibold text-gray-700 mb-3">${dateLabel}</h3>
+                    <div class="space-y-2">
+                        ${dateMoods.map(mood => createMoodItem(mood)).join('')}
+                    </div>
+                `;
+                
+                historyContainer.appendChild(dateSection);
+            });
+        }
+
+        // 創建心情記錄項目
+        function createMoodItem(mood) {
+            const time = new Date(mood.date).toLocaleTimeString('zh-TW', { hour: '2-digit', minute: '2-digit' });
+            
+            return `
+                <div class="mood-history-item bg-gray-50 rounded-lg p-4 border border-gray-200">
+                    <div class="flex items-start justify-between">
+                        <div class="flex items-start gap-3">
+                            <span class="text-2xl">${moodEmojis[mood.mood]}</span>
+                            <div class="flex-1">
+                                <div class="flex items-center gap-2 mb-1">
+                                    <span class="font-medium">${moodLabels[mood.mood]}</span>
+                                    <span class="text-sm text-gray-500">${time}</span>
+                                </div>
+                                ${mood.note ? `<p class="text-gray-600 text-sm mb-2">${mood.note}</p>` : ''}
+                            </div>
+                        </div>
+                        <button onclick="deleteMood(${mood.id})" class="text-gray-400 hover:text-red-600 transition-colors">
+                            <span class="material-symbols-outlined text-[18px]">delete</span>
+                        </button>
+                    </div>
+                </div>
+            `;
+        }
+
+        // 刪除心情記錄
+        function deleteMood(moodId) {
+            const mood = moodManager.moods.find(m => m.id === moodId);
+            if (!mood) return;
+            
+            // 創建自訂確認對話框
+            const confirmDialog = document.createElement('div');
+            confirmDialog.className = 'fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 fade-in';
+            confirmDialog.innerHTML = `
+                <div class="bg-white rounded-xl p-6 w-full max-w-md transform transition-opacity duration-200 opacity-0">
+                    <div class="flex items-center gap-3 mb-4">
+                        <div class="w-12 h-12 bg-red-100 rounded-full flex items-center justify-center">
+                            <span class="material-symbols-outlined text-red-600 text-2xl">delete</span>
+                        </div>
+                        <div>
+                            <h3 class="text-lg font-bold text-gray-900">刪除心情記錄</h3>
+                            <p class="text-sm text-gray-500">此操作無法復原</p>
+                        </div>
+                    </div>
+                    <div class="mb-6">
+                        <p class="text-gray-700">確定要刪除這個心情記錄嗎？</p>
+                    </div>
+                    <div class="flex gap-3 justify-end">
+                        <button onclick="closeDeleteConfirm(this)" 
+                                class="px-4 py-2 text-gray-600 hover:bg-gray-100 rounded-lg transition-colors duration-150">
+                            取消
+                        </button>
+                        <button onclick="confirmDeleteMood(${moodId}, this)" 
+                                class="px-4 py-2 bg-red-600 text-white rounded-lg transition-colors duration-150 hover:bg-red-700">
+                            確定刪除
+                        </button>
+                    </div>
+                </div>
+            `;
+            
+            document.body.appendChild(confirmDialog);
+            
+            // 動畫進入
+            setTimeout(() => {
+                confirmDialog.querySelector('.bg-white').classList.remove('opacity-0');
+                confirmDialog.querySelector('.bg-white').classList.add('opacity-100');
+            }, 10);
+        }
+
+        // 關閉刪除確認對話框
+        function closeDeleteConfirm(button) {
+            const dialog = button.closest('.fixed');
+            dialog.querySelector('.bg-white').classList.add('opacity-0');
+            dialog.querySelector('.bg-white').classList.remove('opacity-100');
+            setTimeout(() => {
+                document.body.removeChild(dialog);
+            }, 150);
+        }
+
+        // 確認刪除心情記錄
+        function confirmDeleteMood(moodId, button) {
+            // 關閉對話框
+            closeDeleteConfirm(button);
+            
+            // 執行刪除
+            moodManager.moods = moodManager.moods.filter(m => m.id !== moodId);
+            if (moodManager.saveMoods()) {
+                showNotification('心情記錄已刪除', 'success');
+                updateStats();
+                renderMoodHistory();
+            } else {
+                showNotification('刪除失敗，請重試', 'error');
+            }
+        }
+
+        // 通知系統
+        function showNotification(message, type = 'info') {
+            const container = document.getElementById('notificationContainer');
+            const notification = document.createElement('div');
+            
+            const colors = {
+                success: 'bg-green-500',
+                error: 'bg-red-500',
+                info: 'bg-blue-500',
+                warning: 'bg-yellow-500'
+            };
+            
+            notification.className = `${colors[type]} text-white px-4 py-3 rounded-lg shadow-lg transform transition-all duration-300 translate-x-full`;
+            notification.innerHTML = `
+                <div class="flex items-center gap-2">
+                    <span class="material-symbols-outlined">${type === 'success' ? 'check_circle' : type === 'error' ? 'error' : 'info'}</span>
+                    <span>${message}</span>
+                </div>
+            `;
+            
+            container.appendChild(notification);
+            
+            // 動畫進入
+            setTimeout(() => {
+                notification.classList.remove('translate-x-full');
+                notification.classList.add('translate-x-0');
+            }, 100);
+            
+            // 3秒後自動消失
+            setTimeout(() => {
+                notification.classList.add('translate-x-full');
+                setTimeout(() => {
+                    container.removeChild(notification);
+                }, 300);
+            }, 3000);
+        }
+    </script>
+</body>
+</html>

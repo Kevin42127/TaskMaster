@@ -515,7 +515,7 @@
         }
         
         .fade-in {
-            animation: fadeIn 0.3s ease-in;
+            animation: fadeIn 0.25s ease-in;
         }
         
         @keyframes fadeIn {
@@ -561,12 +561,12 @@
         }
         
         .fade-in {
-            animation: fadeIn 0.3s ease-in;
+            animation: fadeIn 0.25s ease-in;
         }
         
         @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(10px); }
-            to { opacity: 1; transform: translateY(0); }
+            from { opacity: 0; }
+            to { opacity: 1; }
         }
         
         .slide-in {
@@ -597,18 +597,17 @@
                 <span class="material-symbols-outlined">list_alt</span>
                 任務列表
             </a>
+            <a href="mood.html" class="nav-item flex items-center gap-3 px-4 py-3 text-gray-600 hover:bg-gray-100 transition-colors rounded-xl">
+                <span class="material-symbols-outlined">mood</span>
+                心情記錄
+            </a>
             <a href="settings.html" class="nav-item flex items-center gap-3 px-4 py-3 text-gray-600 hover:bg-gray-100 transition-colors rounded-xl">
                 <span class="material-symbols-outlined">settings</span>
                 設定
             </a>
                     </nav>
         
-        <div class="mt-auto border-t border-gray-200 pt-4">
-            <div class="px-4 py-3 text-center">
-                <span class="text-xs text-gray-500">v1.0.0</span>
-            </div>
-        </div>
-            </aside>
+                    </aside>
 
     <!-- 主內容區域 -->
     <main class="ml-64 h-screen flex">
@@ -648,8 +647,8 @@
         <section id="welcomeScreen" class="flex-1 h-full bg-gray-50 flex items-center justify-center">
             <div class="text-center">
                 <span class="material-symbols-outlined text-6xl text-gray-300 mb-4">task_alt</span>
-                <h2 class="text-2xl font-bold text-gray-700 mb-2">歡迎使用 TaskMaster</h2>
-                <p class="text-gray-500">選擇一個任務查看詳情，或新增一個新任務開始</p>
+                <h2 class="text-2xl font-bold text-gray-700 mb-2">歡迎來到 TaskMaster</h2>
+                <p class="text-gray-500">開始管理您的任務，提升工作效率</p>
             </div>
         </section>
     </main>
@@ -1135,7 +1134,7 @@
             const confirmDialog = document.createElement('div');
             confirmDialog.className = 'fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 fade-in';
             confirmDialog.innerHTML = `
-                <div class="bg-white rounded-xl p-6 w-full max-w-md transform transition-all duration-300 scale-95">
+                <div class="bg-white rounded-xl p-6 w-full max-w-md transform transition-opacity duration-200 opacity-0">
                     <div class="flex items-center gap-3 mb-4">
                         <div class="w-12 h-12 bg-red-100 rounded-full flex items-center justify-center">
                             <span class="material-symbols-outlined text-red-600 text-2xl">warning</span>
@@ -1150,11 +1149,11 @@
                     </div>
                     <div class="flex gap-3 justify-end">
                         <button onclick="closeClearConfirm(this)" 
-                                class="px-4 py-2 text-gray-600 hover:bg-gray-100 rounded-lg transition-all duration-200">
+                                class="px-4 py-2 text-gray-600 hover:bg-gray-100 rounded-lg transition-all duration-150">
                             取消
                         </button>
                         <button onclick="confirmClearAll(this)" 
-                                class="px-4 py-2 bg-red-600 text-white rounded-lg transition-all duration-200 hover:bg-red-700">
+                                class="px-4 py-2 bg-red-600 text-white rounded-lg transition-all duration-150 hover:bg-red-700">
                             確定清空
                         </button>
                     </div>
@@ -1165,19 +1164,19 @@
             
             // 動畫進入
             setTimeout(() => {
-                confirmDialog.querySelector('.bg-white').classList.remove('scale-95');
-                confirmDialog.querySelector('.bg-white').classList.add('scale-100');
+                confirmDialog.querySelector('.bg-white').classList.remove('opacity-0');
+                confirmDialog.querySelector('.bg-white').classList.add('opacity-100');
             }, 10);
         }
 
         // 關閉清空確認對話框
         function closeClearConfirm(button) {
             const dialog = button.closest('.fixed');
-            dialog.querySelector('.bg-white').classList.add('scale-95');
-            dialog.querySelector('.bg-white').classList.remove('scale-100');
+            dialog.querySelector('.bg-white').classList.add('opacity-0');
+            dialog.querySelector('.bg-white').classList.remove('opacity-100');
             setTimeout(() => {
                 document.body.removeChild(dialog);
-            }, 200);
+            }, 150);
         }
 
         // 確認清空所有任務
@@ -1323,7 +1322,7 @@
             const confirmDialog = document.createElement('div');
             confirmDialog.className = 'fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 fade-in';
             confirmDialog.innerHTML = `
-                <div class="bg-white rounded-xl p-6 w-full max-w-md transform transition-opacity duration-300 opacity-0">
+                <div class="bg-white rounded-xl p-6 w-full max-w-md transform transition-opacity duration-200 opacity-0">
                     <div class="flex items-center gap-3 mb-4">
                         <div class="w-12 h-12 bg-red-100 rounded-full flex items-center justify-center">
                             <span class="material-symbols-outlined text-red-600 text-2xl">delete</span>
@@ -1338,11 +1337,11 @@
                     </div>
                     <div class="flex gap-3 justify-end">
                         <button onclick="closeDeleteConfirm(this)" 
-                                class="px-4 py-2 text-gray-600 hover:bg-gray-100 rounded-lg transition-colors duration-200">
+                                class="px-4 py-2 text-gray-600 hover:bg-gray-100 rounded-lg transition-colors duration-150">
                             取消
                         </button>
                         <button onclick="confirmDelete(${task.id}, this)" 
-                                class="px-4 py-2 bg-red-600 text-white rounded-lg transition-colors duration-200 hover:bg-red-700">
+                                class="px-4 py-2 bg-red-600 text-white rounded-lg transition-colors duration-150 hover:bg-red-700">
                             確定刪除
                         </button>
                     </div>
@@ -1365,7 +1364,7 @@
             dialog.querySelector('.bg-white').classList.remove('opacity-100');
             setTimeout(() => {
                 document.body.removeChild(dialog);
-            }, 200);
+            }, 150);
         }
 
         // 確認刪除
