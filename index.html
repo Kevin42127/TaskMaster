@@ -772,6 +772,11 @@
             if (savedTasks && savedTasks.length > 0) {
                 tasks = savedTasks;
                 showNotification(`已載入 ${savedTasks.length} 個任務`, 'info');
+            } else {
+                // 如果沒有保存的任務，清空默認任務
+                tasks = [];
+                // 保存空任務列表到 localStorage，防止歡迎任務重新出現
+                storageManager.saveTasks();
             }
         }
         
