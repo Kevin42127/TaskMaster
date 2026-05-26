@@ -186,6 +186,76 @@
                 max-width: 1400px;
             }
         }
+        
+        /* 自訂義文字選取樣式 */
+        ::selection {
+            background-color: #6366f1;
+            color: white;
+        }
+        
+        ::-moz-selection {
+            background-color: #6366f1;
+            color: white;
+        }
+        
+        /* 卡片文字選取 */
+        .card-shadow ::selection {
+            background-color: #6366f1;
+            color: white;
+        }
+        
+        .card-shadow ::-moz-selection {
+            background-color: #6366f1;
+            color: white;
+        }
+        
+        /* 按鈕文字選取 */
+        .btn ::selection {
+            background-color: #6366f1;
+            color: white;
+        }
+        
+        .btn ::-moz-selection {
+            background-color: #6366f1;
+            color: white;
+        }
+        
+        /* 標題選取 */
+        h1, h2, h3, h4, h5, h6 {
+            ::selection {
+                background-color: #6366f1;
+                color: white;
+            }
+            
+            ::-moz-selection {
+                background-color: #6366f1;
+                color: white;
+            }
+        }
+        
+        /* 連結選取 */
+        a ::selection {
+            background-color: #6366f1;
+            color: white;
+        }
+        
+        a ::-moz-selection {
+            background-color: #6366f1;
+            color: white;
+        }
+        
+        /* 輸入框選取 */
+        input ::selection,
+        textarea ::selection {
+            background-color: #6366f1;
+            color: white;
+        }
+        
+        input ::-moz-selection,
+        textarea ::-moz-selection {
+            background-color: #6366f1;
+            color: white;
+        }
     </style>
 </head>
 <body class="bg-gray-50">
