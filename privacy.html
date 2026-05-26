@@ -38,6 +38,112 @@
             from { opacity: 0; transform: translateY(20px); }
             to { opacity: 1; transform: translateY(0); }
         }
+        
+        /* 響應式設計 */
+        @media (max-width: 768px) {
+            .max-w-4xl {
+                max-width: 100%;
+                padding: 1rem;
+            }
+            
+            .header-container {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 1rem;
+            }
+            
+            .header-title {
+                font-size: 1.5rem;
+            }
+            
+            .card-shadow {
+                margin-bottom: 1rem;
+            }
+            
+            .section-title {
+                font-size: 1.125rem;
+            }
+            
+            .feature-item {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 0.5rem;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .max-w-4xl {
+                padding: 0.75rem;
+            }
+            
+            .header-title {
+                font-size: 1.25rem;
+            }
+            
+            .card-shadow {
+                padding: 1rem;
+            }
+            
+            .section-title {
+                font-size: 1rem;
+            }
+            
+            .feature-title {
+                font-size: 0.875rem;
+            }
+            
+            .feature-description {
+                font-size: 0.75rem;
+            }
+            
+            .footer-container {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 1rem;
+            }
+        }
+        
+        /* 手勢支援 */
+        @media (pointer: coarse) {
+            .back-btn {
+                min-height: 44px;
+                min-width: 44px;
+            }
+            
+            .card-shadow {
+                padding: 1rem;
+            }
+            
+            .footer-link {
+                padding: 0.5rem;
+            }
+        }
+        
+        /* 高解析度螢幕 */
+        @media (min-width: 1920px) {
+            .max-w-4xl {
+                max-width: 1400px;
+            }
+        }
+        
+        /* 打印樣式 */
+        @media print {
+            .back-btn,
+            .footer-container {
+                display: none;
+            }
+            
+            .card-shadow {
+                box-shadow: none;
+                border: 1px solid #e5e7eb;
+                page-break-inside: avoid;
+            }
+            
+            .max-w-4xl {
+                max-width: 100%;
+                padding: 0;
+            }
+        }
     </style>
 </head>
 <body class="bg-gray-50 min-h-screen">
@@ -242,7 +348,7 @@
                     <a href="/terms" class="text-sm text-indigo-600 hover:text-indigo-700 transition-colors">
                         服務條款
                     </a>
-                    <a href="/settings" class="text-sm text-indigo-600 hover:text-indigo-700 transition-colors">
+                    <a href="settings.html" class="text-sm text-indigo-600 hover:text-indigo-700 transition-colors">
                         返回設定
                     </a>
                 </div>

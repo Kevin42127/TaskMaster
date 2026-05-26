@@ -60,6 +60,78 @@
             color: #dc2626;
         }
         
+        /* 響應式設計 */
+        @media (max-width: 768px) {
+            .main-container {
+                flex-direction: column;
+            }
+            
+            .sidebar {
+                width: 100%;
+                height: auto;
+                position: relative;
+                border-right: none;
+                border-bottom: 1px solid #e5e7eb;
+            }
+            
+            .task-list {
+                width: 100%;
+                min-width: unset;
+            }
+            
+            .task-detail {
+                width: 100%;
+                min-width: unset;
+            }
+            
+            .mobile-menu-btn {
+                display: block;
+            }
+            
+            .sidebar.hidden {
+                display: none;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .container {
+                padding: 1rem;
+            }
+            
+            .task-card {
+                padding: 1rem;
+            }
+            
+            .btn {
+                padding: 0.5rem 1rem;
+                font-size: 0.875rem;
+            }
+            
+            .modal-content {
+                margin: 1rem;
+                max-width: calc(100% - 2rem);
+            }
+        }
+        
+        /* 手勢支援 */
+        @media (pointer: coarse) {
+            .btn {
+                min-height: 44px;
+                min-width: 44px;
+            }
+            
+            .task-card {
+                padding: 1rem;
+            }
+        }
+        
+        /* 高解析度螢幕 */
+        @media (min-width: 1920px) {
+            .container {
+                max-width: 1400px;
+            }
+        }
+        
         /* 自訂下拉選單樣式 */
         .custom-select {
             position: relative;

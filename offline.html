@@ -47,6 +47,97 @@
             0%, 100% { transform: scale(1); opacity: 1; }
             50% { transform: scale(1.05); opacity: 0.8; }
         }
+        
+        /* 響應式設計 */
+        @media (max-width: 768px) {
+            .container {
+                padding: 1rem;
+            }
+            
+            .offline-icon {
+                font-size: 4rem;
+            }
+            
+            .offline-title {
+                font-size: 1.5rem;
+            }
+            
+            .offline-description {
+                font-size: 0.875rem;
+            }
+            
+            .btn {
+                padding: 0.75rem 1.5rem;
+                font-size: 0.875rem;
+            }
+            
+            .feature-grid {
+                grid-template-columns: 1fr;
+                gap: 1rem;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .container {
+                padding: 0.75rem;
+            }
+            
+            .offline-icon {
+                font-size: 3rem;
+            }
+            
+            .offline-title {
+                font-size: 1.25rem;
+            }
+            
+            .offline-description {
+                font-size: 0.75rem;
+            }
+            
+            .btn {
+                padding: 0.5rem 1rem;
+                font-size: 0.75rem;
+                min-height: 44px;
+            }
+            
+            .card-shadow {
+                padding: 1rem;
+            }
+        }
+        
+        /* 手勢支援 */
+        @media (pointer: coarse) {
+            .btn {
+                min-height: 44px;
+                min-width: 44px;
+            }
+            
+            .card-shadow {
+                padding: 1rem;
+            }
+        }
+        
+        /* 高解析度螢幕 */
+        @media (min-width: 1920px) {
+            .container {
+                max-width: 1400px;
+            }
+        }
+        
+        /* 橫向模式 */
+        @media (orientation: landscape) and (max-height: 500px) {
+            .offline-icon {
+                font-size: 2rem;
+            }
+            
+            .offline-title {
+                font-size: 1rem;
+            }
+            
+            .offline-description {
+                font-size: 0.75rem;
+            }
+        }
     </style>
 </head>
 <body class="bg-gray-50 min-h-screen flex items-center justify-center">

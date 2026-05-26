@@ -100,13 +100,91 @@
             transform: translateX(24px);
         }
         
-        .fade-in {
-            animation: fadeIn 0.5s ease-in;
+                
+        /* 響應式設計 */
+        @media (max-width: 768px) {
+            .sidebar {
+                transform: translateX(-100%);
+                transition: transform 0.3s ease;
+            }
+            
+            .sidebar.open {
+                transform: translateX(0);
+            }
+            
+            .main-content {
+                margin-left: 0;
+            }
+            
+            .mobile-menu-btn {
+                display: block;
+                position: fixed;
+                top: 1rem;
+                left: 1rem;
+                z-index: 60;
+                background: white;
+                border: 1px solid #e5e7eb;
+                border-radius: 8px;
+                padding: 0.5rem;
+                box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            }
+            
+            .overlay {
+                display: block;
+                position: fixed;
+                top: 0;
+                left: 0;
+                right: 0;
+                bottom: 0;
+                background: rgba(0, 0, 0, 0.5);
+                z-index: 40;
+                opacity: 0;
+                visibility: hidden;
+                transition: opacity 0.3s ease, visibility 0.3s ease;
+            }
+            
+            .overlay.active {
+                opacity: 1;
+                visibility: visible;
+            }
         }
         
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
+        @media (max-width: 480px) {
+            .main-content {
+                padding: 1rem;
+            }
+            
+            .card-shadow {
+                margin-bottom: 1rem;
+            }
+            
+            .btn {
+                padding: 0.5rem 1rem;
+                font-size: 0.875rem;
+            }
+            
+            .link-card {
+                padding: 1rem;
+            }
+        }
+        
+        /* 手勢支援 */
+        @media (pointer: coarse) {
+            .btn {
+                min-height: 44px;
+                min-width: 44px;
+            }
+            
+            .link-card {
+                padding: 1rem;
+            }
+        }
+        
+        /* 高解析度螢幕 */
+        @media (min-width: 1920px) {
+            .max-w-4xl {
+                max-width: 1400px;
+            }
         }
     </style>
 </head>
@@ -123,7 +201,7 @@
                 <span class="material-symbols-outlined">list_alt</span>
                 任務列表
             </a>
-            <a href="/settings" class="nav-item flex items-center gap-3 px-4 py-3 bg-indigo-100 text-indigo-700 rounded-xl font-semibold">
+            <a href="settings.html" class="nav-item flex items-center gap-3 px-4 py-3 bg-indigo-100 text-indigo-700 rounded-xl font-semibold">
                 <span class="material-symbols-outlined">settings</span>
                 設定
             </a>
@@ -139,7 +217,7 @@
     <!-- 主內容區域 -->
     <main class="ml-64 h-screen overflow-y-auto custom-scrollbar">
         <div class="max-w-4xl mx-auto p-8">
-            <div class="mb-8 fade-in">
+            <div class="mb-8">
                 <h2 class="text-3xl font-bold text-gray-900 mb-2">資料管理</h2>
                 <p class="text-gray-600">管理您的任務數據</p>
             </div>
@@ -147,7 +225,7 @@
             <div class="space-y-8">
                                 
                 <!-- 資料管理 -->
-                <div class="bg-white rounded-xl p-6 card-shadow fade-in" style="animation-delay: 0.1s">
+                <div class="bg-white rounded-xl p-6 card-shadow">
                     <h3 class="text-lg font-semibold text-gray-900 mb-4 flex items-center gap-2">
                         <span class="material-symbols-outlined text-indigo-600">storage</span>
                         資料管理
@@ -168,7 +246,7 @@
                 </div>
                 
                 <!-- 隱私政策與服務條款 -->
-                <div class="bg-white rounded-xl p-6 card-shadow fade-in" style="animation-delay: 0.2s">
+                <div class="bg-white rounded-xl p-6 card-shadow">
                     <h3 class="text-lg font-semibold text-gray-900 mb-4 flex items-center gap-2">
                         <span class="material-symbols-outlined text-indigo-600">gavel</span>
                         隱私政策與服務條款
@@ -197,8 +275,31 @@
                     </div>
                 </div>
                 
+                <!-- 應用程式下載 -->
+                <div class="bg-white rounded-xl p-6 card-shadow">
+                    <h3 class="text-lg font-semibold text-gray-900 mb-4 flex items-center gap-2">
+                        <span class="material-symbols-outlined text-indigo-600">download</span>
+                        應用程式下載
+                    </h3>
+                    <div class="space-y-3">
+                        <a href="https://apps.microsoft.com/detail/9PK1ZFK1F07M?hl=zh-tw&gl=TW&ocid=pdpshare" 
+                           target="_blank" 
+                           rel="noopener noreferrer"
+                           class="flex items-center justify-between p-3 bg-gray-50 rounded-lg hover:bg-gray-100 transition-colors group">
+                            <div class="flex items-center gap-3">
+                                <span class="material-symbols-outlined text-indigo-600">store</span>
+                                <div>
+                                    <span class="text-sm font-medium text-gray-900">Microsoft Store</span>
+                                    <p class="text-xs text-gray-500">從 Microsoft Store 下載應用程式</p>
+                                </div>
+                            </div>
+                            <span class="material-symbols-outlined text-gray-400 group-hover:text-gray-600">open_in_new</span>
+                        </a>
+                    </div>
+                </div>
+                
                 <!-- 關於 -->
-                <div class="bg-white rounded-xl p-6 card-shadow fade-in" style="animation-delay: 0.3s">
+                <div class="bg-white rounded-xl p-6 card-shadow">
                     <h3 class="text-lg font-semibold text-gray-900 mb-4 flex items-center gap-2">
                         <span class="material-symbols-outlined text-indigo-600">info</span>
                         關於
@@ -229,7 +330,7 @@
                 warning: 'bg-yellow-500'
             };
             
-            notification.className = `${colors[type]} text-white px-4 py-3 rounded-lg shadow-lg flex items-center gap-2 fade-in`;
+            notification.className = `${colors[type]} text-white px-4 py-3 rounded-lg shadow-lg flex items-center gap-2`;
             notification.innerHTML = `
                 <span class="material-symbols-outlined text-sm">
                     ${type === 'success' ? 'check_circle' : type === 'error' ? 'error' : type === 'warning' ? 'warning' : 'info'}
@@ -302,11 +403,78 @@
         
         // 清空所有任務
         function clearAllTasks() {
-            if (confirm('確定要清空所有任務嗎？此操作無法復原。')) {
+            // 獲取當前任務數量
+            const savedTasks = storageManager.loadTasks();
+            const taskCount = savedTasks ? savedTasks.length : 0;
+            
+            if (taskCount === 0) {
+                showNotification('沒有任務可以清空', 'info');
+                return;
+            }
+            
+            // 創建自訂義確認對話框
+            const confirmDialog = document.createElement('div');
+            confirmDialog.className = 'fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50';
+            confirmDialog.innerHTML = `
+                <div class="bg-white rounded-xl p-6 w-full max-w-md transform transition-all duration-300 scale-95">
+                    <div class="flex items-center gap-3 mb-4">
+                        <div class="w-12 h-12 bg-red-100 rounded-full flex items-center justify-center">
+                            <span class="material-symbols-outlined text-red-600 text-2xl">warning</span>
+                        </div>
+                        <div>
+                            <h3 class="text-lg font-bold text-gray-900">清空所有任務</h3>
+                            <p class="text-sm text-gray-500">此操作將永久刪除所有 ${taskCount} 個任務</p>
+                        </div>
+                    </div>
+                    <div class="mb-6">
+                        <p class="text-gray-700">確定要清空所有任務嗎？此操作無法復原。</p>
+                    </div>
+                    <div class="flex gap-3 justify-end">
+                        <button onclick="closeClearConfirm(this)" 
+                                class="px-4 py-2 text-gray-600 hover:bg-gray-100 rounded-lg transition-all duration-200">
+                            取消
+                        </button>
+                        <button onclick="confirmClearAll(this)" 
+                                class="px-4 py-2 bg-red-600 text-white rounded-lg transition-all duration-200 hover:bg-red-700">
+                            確定清空
+                        </button>
+                    </div>
+                </div>
+            `;
+            
+            document.body.appendChild(confirmDialog);
+            
+            // 動畫進入
+            setTimeout(() => {
+                confirmDialog.querySelector('.bg-white').classList.remove('scale-95');
+                confirmDialog.querySelector('.bg-white').classList.add('scale-100');
+            }, 10);
+            
+            // 全局函數供按鈕調用
+            window.closeClearConfirm = function(button) {
+                const dialog = button.closest('.fixed');
+                dialog.querySelector('.bg-white').classList.add('scale-95');
+                dialog.querySelector('.bg-white').classList.remove('scale-100');
+                setTimeout(() => {
+                    document.body.removeChild(dialog);
+                }, 200);
+            };
+            
+            window.confirmClearAll = function(button) {
                 // 清空本地儲存
                 storageManager.clearTasks();
-                showNotification('已清空所有任務', 'success');
-            }
+                
+                // 關閉對話框
+                closeClearConfirm(button);
+                
+                // 顯示成功通知
+                showNotification(`已清空 ${taskCount} 個任務`, 'success');
+                
+                // 3秒後顯示額外提示
+                setTimeout(() => {
+                    showNotification('所有任務數據已永久刪除', 'info');
+                }, 3000);
+            };
         }
     </script>
 </body>
