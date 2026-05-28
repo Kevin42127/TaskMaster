@@ -41,6 +41,10 @@
     {
       "src": "mood.html",
       "use": "@vercel/static"
+    },
+    {
+      "src": "TaskMaster-qrcode.png",
+      "use": "@vercel/static"
     }
   ],
   "routes": [
@@ -67,6 +71,10 @@
     {
       "src": "/mood",
       "dest": "/mood.html"
+    },
+    {
+      "src": "/TaskMaster-qrcode.png",
+      "dest": "/TaskMaster-qrcode.png"
     },
     {
       "src": "/sw.js",
