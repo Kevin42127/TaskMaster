@@ -45,6 +45,10 @@
     {
       "src": "TaskMaster-qrcode.png",
       "use": "@vercel/static"
+    },
+    {
+      "src": "IMG_0124.jpg",
+      "use": "@vercel/static"
     }
   ],
   "routes": [
@@ -75,6 +79,10 @@
     {
       "src": "/TaskMaster-qrcode.png",
       "dest": "/TaskMaster-qrcode.png"
+    },
+    {
+      "src": "/IMG_0124.jpg",
+      "dest": "/IMG_0124.jpg"
     },
     {
       "src": "/sw.js",
