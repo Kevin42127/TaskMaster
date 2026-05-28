@@ -49,6 +49,10 @@
     {
       "src": "IMG_0124.jpg",
       "use": "@vercel/static"
+    },
+    {
+      "src": "IMG_0125.jpg",
+      "use": "@vercel/static"
     }
   ],
   "routes": [
@@ -83,6 +87,10 @@
     {
       "src": "/IMG_0124.jpg",
       "dest": "/IMG_0124.jpg"
+    },
+    {
+      "src": "/IMG_0125.jpg",
+      "dest": "/IMG_0125.jpg"
     },
     {
       "src": "/sw.js",
